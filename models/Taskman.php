@@ -12,7 +12,7 @@ class Taskman
     {
 
         $db = Application::$App->getConnection();
-        $stmt = $db->query("select id, name, email, description, status from taskman");
+        $stmt = $db->query("select id, name, email, description, status, img from taskman");
         $taskList = $stmt->fetchAll(\PDO::FETCH_OBJ);
 
         return $taskList;

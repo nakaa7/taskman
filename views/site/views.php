@@ -11,8 +11,10 @@
         <label for="description">Описание задачи.</label>
         <textarea name="description" disabled class="form-control" id="description" rows="3"><?=$task->description;?></textarea>
     </div>
-    <img src="<?=$task->img?>" class="img-fluid" alt="Responsive image">
-    <div class="form-check">
+    <?php if(!is_dir(ROOT . $value->img) && file_exists(ROOT . $value->img)){?>
+        <img src="<?=$task->img?>" class="img-fluid" alt="Responsive image">
+    <?php } ?>
+        <div class="form-check">
         <label class="form-check-label">
             <input type="checkbox" name="status" <?=($task->status) ? 'checked': ''?> disabled class="form-check-input">
             Статус

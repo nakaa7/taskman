@@ -23,8 +23,8 @@ class SiteController extends Controller
     {
         $taskman = new Taskman();
 
-        if ((int) $id) {
-            $task = $taskman->getTask($id);
+        if ($id = 1) {
+            $task = $taskman->getTask(1);
         }
 
         return $this->render('views', [

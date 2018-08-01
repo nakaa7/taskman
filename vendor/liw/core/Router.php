@@ -15,12 +15,12 @@ class Router
     public function getRules($routes)
     {
         $uri = $this->getUri();
-
+        
         foreach ($routes as $type => $uriPattern) {
             if (preg_match("~$uriPattern~", $uri, $internalRoute)) {
-
-                $segments = explode('/', $internalRoute[0]);
                 
+                $segments = preg_split("~[\/\?]+~", $internalRoute[0]); 
+
                 $controllerName = (empty($segments[0]) ? 'site' : array_shift($segments)) . 'Controller';
                 
                 $controllerName = 'app\\controllers\\' . \ucfirst($controllerName);
@@ -29,10 +29,9 @@ class Router
 
                 if (method_exists($controllerName, $actionName)) {
                     $controllerObject = new $controllerName;
+
                     $result = call_user_func_array(array($controllerObject, $actionName), $segments);
-                    echo "<pre>";
-                    print_r($result);
-                    echo "</pre>";
+
                 } else {
                     die("404. Страница не найдена!");
                 }
